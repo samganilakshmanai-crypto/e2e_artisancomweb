@@ -19,7 +19,8 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({
     origin: [
         'https://artisanfrontend.onrender.com',  // Production frontend
-        'http://localhost:5173'                    // Local development
+        'http://localhost:5173',                   // Local development
+        'http://localhost:5174'                    // Local development
     ],
     credentials: true,
     optionsSuccessStatus: 200
