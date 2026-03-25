@@ -17,8 +17,12 @@ const PORT = process.env.PORT || 5000;
 
 // Middlewares
 app.use(cors({
-    origin: 'http://localhost:5173', // Vite default port
-    credentials: true // Crucial for cookie-based session login checks
+    origin: [
+        'https://artisan-frontend.onrender.com',  // Production frontend
+        'http://localhost:5173'                    // Local development
+    ],
+    credentials: true,
+    optionsSuccessStatus: 200
 }));
 app.use(express.json());
 app.use(cookieParser()); // Enables reading HttpOnly cookies
