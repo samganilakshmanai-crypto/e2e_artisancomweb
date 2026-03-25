@@ -1,6 +1,4 @@
 import ArtisanProfile from '../models/ArtisanProfile.js';
-import Product from '../models/Product.js';
-import Order from '../models/Order.js';
 
 export const getArtisanProfile = async (req, res) => {
     try {
@@ -52,19 +50,12 @@ export const getAdminStats = async (req, res) => {
     try {
         const usersCount = await User.countDocuments({ role: 'customer' });
         const artisansCount = await User.countDocuments({ role: 'artisan' });
-        const productsCount = await Product.countDocuments();
-        const orders = await Order.find();
-        const ordersCount = await Order.countDocuments();
-        const totalRevenue = orders.reduce((sum, order) => sum + (order.totalAmount || 0), 0);
         
         const pendingArtisans = await ArtisanProfile.find({ isVerified: false }).populate('userId', 'name email');
         
         res.json({
             usersCount,
             artisansCount,
-            productsCount,
-            ordersCount,
-            totalRevenue,
             pendingVerificationCount: pendingArtisans.length,
             flagsCount: 0,
             pendingArtisans
