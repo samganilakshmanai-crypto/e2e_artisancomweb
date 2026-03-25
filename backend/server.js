@@ -16,17 +16,14 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middlewares
-const frontendUrl = process.env.FRONTEND_URL || 'https://artisanfrontend.onrender.com';
-const allowedOrigins = [frontendUrl, 'http://localhost:5173', 'http://localhost:5174'];
-
 app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin) return callback(null, true); // Allow tools like Postman / server-to-server
-        if (allowedOrigins.includes(origin)) return callback(null, true);
-        return callback(new Error(`CORS policy: origin ${origin} not allowed`));
-    },
+    origin: [
+        'https://artisanfrontend.onrender.com',  // Production frontend
+        'http://localhost:5173',                   // Local development
+        'http://localhost:5174'                    // Local development
+    ],
     credentials: true,
-    optionsSuccessStatus: 200,
+    optionsSuccessStatus: 200
 }));
 app.use(express.json());
 app.use(cookieParser()); // Enables reading HttpOnly cookies
