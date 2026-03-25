@@ -171,7 +171,7 @@ const AdminDashboard = () => {
                             <div className="p-3 bg-indigo-50 text-indigo-600 rounded-lg"><ShoppingBag size={24}/></div>
                             <div>
                                 <h3 className="text-gray-500 font-medium tracking-wide text-xs">TOTAL PRODUCTS</h3>
-                                <p className="text-2xl font-bold text-gray-800 mt-1">{stats.productsCount ?? products.length}</p>
+                                <p className="text-2xl font-bold text-gray-800 mt-1">{products.length}</p>
                             </div>
                         </div>
                         <div className="bg-white p-6 rounded-xl shadow-sm border border-red-100 flex items-center gap-4 border-l-4 border-l-red-500">
@@ -186,12 +186,12 @@ const AdminDashboard = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200 shadow-sm">
                             <h3 className="text-lg font-bold text-blue-900 mb-2">Total Orders</h3>
-                            <p className="text-3xl font-bold text-blue-700">{stats.ordersCount ?? orders.length}</p>
+                            <p className="text-3xl font-bold text-blue-700">{orders.length}</p>
                             <p className="text-sm text-blue-600 mt-2">Across all customers</p>
                         </div>
                         <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl border border-green-200 shadow-sm">
                             <h3 className="text-lg font-bold text-green-900 mb-2">Total Revenue</h3>
-                            <p className="text-3xl font-bold text-green-700">₹{(stats.totalRevenue ?? orders.reduce((sum, order) => sum + (order.totalAmount || 0), 0)).toFixed(2)}</p>
+                            <p className="text-3xl font-bold text-green-700">₹{orders.reduce((sum, order) => sum + order.totalAmount, 0).toFixed(2)}</p>
                             <p className="text-sm text-green-600 mt-2">From all orders</p>
                         </div>
                     </div>
