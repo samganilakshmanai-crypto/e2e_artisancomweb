@@ -51,20 +51,6 @@ app.get('/', (req, res) => {
     res.send('Artisan Marketplace API is running...');
 });
 
-// Serve frontend SPA when requested (Render-style single-repo/full-stack flow)
-if (process.env.NODE_ENV === 'production' || process.env.SERVE_BACKEND_WITH_FRONTEND === 'true') {
-    const frontendDist = path.join(__dirname, '../frontend/dist');
-    app.use(express.static(frontendDist));
-
-    app.get('*', (req, res) => {
-        if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
-            return res.status(404).json({ message: 'API route not found' });
-        }
-
-        return res.sendFile(path.join(frontendDist, 'index.html'));
-    });
-}
-
 // Start Server
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
