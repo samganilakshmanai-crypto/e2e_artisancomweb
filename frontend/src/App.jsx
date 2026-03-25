@@ -47,7 +47,7 @@ function App() {
           
           <Route path="customer" element={<CustomerDashboard />} />
           <Route path="products" element={
-              userInfo?.role === 'artisan' ? <ProductsManagement /> : <ProductCatalog />
+              userInfo?.role === 'artisan' || userInfo?.role === 'admin' ? <ProductsManagement /> : <ProductCatalog />
           } />
           <Route path="products/:id" element={<ProductDetails />} />
           <Route path="cart" element={<Cart />} />
